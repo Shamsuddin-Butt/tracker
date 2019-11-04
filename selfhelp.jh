@@ -1,0 +1,589 @@
+
+
+
+
+
+
+
+
+entity Account {
+
+bankinstitute 	 String,
+bic 	 String,
+firstName 	 String,
+iban 	 String,
+name 	 String,
+
+}
+
+
+
+
+
+
+
+entity Address {
+
+	houseNumber 	 String,
+	location 	 String,
+	plz 	 Integereger,
+	street 	 String
+
+}
+
+
+
+
+
+
+
+entity Account {
+
+bankinstitute 	 String,
+bic 	 String,
+firstName 	 String,
+iban 	 String,
+name 	 String,
+
+}
+
+
+
+
+
+
+
+entity Address {
+
+	houseNumber 	 String,
+	location 	 String,
+	plz 	 Integereger,
+	street 	 String
+
+}
+
+
+
+
+
+
+
+entity AppliedMeans {
+
+	amount 	 Double,
+	funder 	 String,
+	type 	 String
+
+}
+
+
+
+
+
+
+entity AppoIntegerment {
+
+	comment 	 String,
+	date 	 Timestamp,
+	deadline 	 Integer,
+	type 	 String,
+	version 	 Integer
+
+
+}
+
+
+
+
+
+
+
+entity Association {
+
+	federalState 	 String,
+	membershipFee 	 Double,
+	name 	 String,
+	note 	 String
+
+}
+
+
+
+
+
+
+
+entity Attachment {
+
+	date Timestamp,
+	file 	 String,
+	name 	 String
+
+}
+
+
+
+
+
+
+
+entity Authority {
+
+name 	 String,
+
+}
+
+
+
+
+
+
+
+entity ContactPerson {
+
+firstName 	 String,
+name 	 String,
+title 	 String
+
+}
+
+
+
+
+
+
+
+entity Disease {
+
+icdChapter 	 String,
+mainDiagnosis 	 String,
+numberOfAffectedPersons 	 Integer,
+secondaryDiagnosis 	 String
+
+}
+
+
+
+
+
+
+
+entity EligibilityRequest {
+
+applicant 	 Organisation,
+attachments 	 List<Attachment>,
+belongingSupportGroups 	 Integer,
+clubs 	 Integer,
+comment 	 String,
+foundation 	 Foundation,
+media 	 List<Media>,
+members 	 Integer,
+membershipFee 	 Double,
+memberships 	 List<Association>,
+note 	 String,
+numberOfFullyEmployed 	 Integer,
+numberPartTimeEmployed 	 Integer,
+office 	 Boolean,
+originalEligibilityRequest 	 EligibilityRequest,
+otherAssociationStructures 	 String,
+promoter 	 Organisation,
+regionalAssociations 	 List<String>,
+regionalSubdivisions 	 List<String>,
+structuralData 	 StructuralData,
+version 	 Integer,
+year 	 Integer
+
+}
+
+
+
+
+
+
+
+entity ExpensesHistory {
+
+totalExpenses 	 TotalExpenses,
+year 	 Integer
+
+
+}
+
+
+
+
+
+
+
+entity ForeignResources {
+
+accidentInsurance 	 Double,
+charityDonations 	 Double,
+donation 	 Double,
+federalFunds 	 Double,
+localFunds 	 Double,
+lumpSumSupport 	 Double,
+nursingInsurance 	 Double,
+otherIncome 	 Double,
+pensionInsurance 	 Double,
+projectFunding 	 Double,
+sponsoring 	 Double,
+stateFunds 	 Double,
+thirdPartyIncome 	 Double
+
+}
+
+
+
+
+
+
+
+entity Foundation {
+
+address 	 Address,
+contactPerson 	 ContactPerson,
+email 	 String,
+name 	 String,
+phone 	 String
+
+}
+
+
+
+
+
+
+
+entity IncomeHistory {
+
+totalIncome 	 TotalIncome,
+year 	 Integer
+
+}
+
+
+
+
+
+
+entity Limit {
+
+comment 	 String,
+deadline 	 Integer,
+organisation 	 Organisation,
+validFrom 	 Timestamp,
+validTo 	 Timestamp
+
+
+}
+
+
+
+
+
+
+
+entity MaterialExpenses {
+
+Double 	 Double,
+furnishings 	 Double,
+network 	 Double,
+officeSupplies 	 Double,
+postage 	 Double,
+rentOffice 	 Double,
+rentOthers 	 Double,
+training 	 Double,
+travelCosts 	 Double
+
+
+}
+
+
+
+
+
+
+
+entity Media {
+
+note 	 String,
+type 	 String
+
+}
+
+
+
+
+
+
+
+entity Organisation {
+
+	 account Account,
+address 	 Address,
+associationRegisterExtract 	 Attachment,
+associationRegisterYear 	 Integer,
+category 	 String,
+contact 	 ContactPerson,
+description 	 String,
+disease 	 Disease,
+eligible 	 Boolean,
+email 	 String,
+foundationYear 	 Integer,
+homepage 	 String,
+ikNumber 	 String,
+lastChecked 	 Timestamp,
+mailbox 	 PLZ,
+managementBoard 	 List<ContactPerson>,
+managingDirector 	 ContactPerson,
+motto 	 Boolean,
+name 	 String,
+phone 	 String,
+releaseNotification 	 Attachment,
+releaseNotificationDeadline 	 Timestamp,
+statute 	 Attachment,
+sufficient 	 Boolean,
+transparency 	 String,
+version 	 Integer
+
+}
+
+
+
+
+
+
+
+
+
+entity OtherExpenses {
+
+membershipExpenses 	 Double,
+otherInstitutionalExpenses 	 Double
+
+}
+
+
+
+
+
+
+
+entity OwnResources {
+
+boosterClubs 	 Double,
+heritage 	 Double,
+IntegererestIncome 	 Double,
+membershipFee 	 Double,
+otherIncome 	 Double,
+purposeEnterprise 	 Double,
+takenReserves 	 Double,
+umbrellaOrganisation 	 Double
+
+
+}
+
+
+
+
+
+
+
+entity Payment {
+
+amount 	 Double,
+releasedOn 	 Timestamp,
+supportRequest 	 SupportRequest,
+version 	 Integer
+
+}
+
+
+
+
+
+
+
+entity Person {
+
+locked 	 Boolean,
+numberOfFails 	 Integer,
+organisation 	 Organisation,
+userId 	 GUID
+
+}
+
+
+
+
+
+
+
+entity Process {
+
+content 	 String,
+name 	 String,
+time 	 Timestamp
+
+
+}
+
+
+
+
+
+
+
+entity ProjectCosts {
+
+minusAppliedMeans 	 Double,
+minusEquityRatio 	 Double,
+minusOtherMeans 	 Double,
+total 	 Double
+
+
+}
+
+
+
+
+
+
+
+entity ProjectRequest {
+
+appliedMeans 	 List<AppliedMeans>,
+duration 	 Integer,
+furtherExplanations 	 String,
+goal 	 String,
+participants 	 String,
+projectCosts 	 ProjectCosts,
+setting 	 String,
+successIndicators 	 String,
+targetGroup 	 String,
+title 	 String
+
+
+}
+
+
+
+
+
+
+
+entity PublicRelationsExpenses {
+
+exhibition 	 Double,
+media 	 Double,
+otherMaterialCosts 	 Double
+
+
+}
+
+
+
+
+
+
+
+entity SupportRequest {
+
+applicant 	 Organisation,
+attachments 	 List<Attachment>,
+eligibilityRequest 	 EligibilityRequest,
+expensesHistory 	 List<ExpensesHistory>,
+incomeHistory 	 List<TotalIncome>,
+note 	 String,
+originalSupportRequest 	 SupportRequest,
+plannedActivities 	 String,
+projectRequest 	 ProjectRequest,
+promoter 	 Organisation,
+requestedFundingAmount 	 Double,
+requestedFunds 	 Double,
+state 	 String,
+sufficient 	 Boolean,
+suggestion 	 Double,
+supportKind 	 String,
+supportSum 	 Double,
+totalExpenses 	 TotalExpenses,
+totalIncome 	 TotalIncome,
+transparency 	 String,
+version 	 Integer,
+year 	 Integer
+
+
+}
+
+
+
+
+
+
+
+entity TotalExpenses {
+
+freeReserves 	 Double,
+materialExpenses 	 MaterialExpenses,
+otherExpenses 	 OtherExpenses,
+personnelAdditionalCosts 	 Double,
+personnelExpenses 	 Double,
+projectCosts 	 Double,
+publicRelationsExpenses 	 PublicRelationsExpenses
+
+
+}
+
+
+
+
+
+
+
+entity TotalIncome {
+
+foreignResources 	 ForeignResources,
+ownResources 	 OwnResources
+
+}
+
+
+
+
+
+
+
+entity UseOfFunds {
+
+attachments 	 List<Attachment>,
+expenses 	 TotalExpenses,
+name 	 String,
+paidBySupportRequest 	 TotalExpenses,
+receivedFunds 	 Double,
+supportRequest 	 SupportRequest,
+transparency 	 String,
+unusedFunds 	 Double,
+usedFunds 	 Double,
+version 	 Integer
+
+
+}
+
+
+
+
+
+
+
+entity User {
+
+activated 	 Boolean,
+email 	 String,
+first_name 	 String,
+last_name 	 String,
+login 	 String,
+password_hash 	 String
+
+
+}
