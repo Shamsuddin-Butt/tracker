@@ -1,0 +1,366 @@
+entity Account {
+ bankinstitute String,
+ bic String,
+ firstName String,
+ iban String,
+ name String
+}
+ 
+entity Address {
+ houseNumber String,
+ location String,
+ plz Integer,
+ street String
+}
+ 
+entity AppliedMeans {
+ amount Double,
+ funder String,
+ type String
+}
+ 
+entity Appointment {
+ comment String,
+ date Instant,
+ deadline Integer,
+ type String,
+ version Integer
+}
+ 
+entity Association {
+ federalState String,
+ membershipFee Double,
+ name String,
+ note String
+}
+ 
+entity Attachment {
+ date Timestamp,
+ file String,
+ name String
+}
+ 
+entity Authority {
+ name String,
+}
+ 
+entity ContactPerson {
+ firstName String,
+ name String,
+ title String
+}
+ 
+entity Disease {
+ icdChapter String,
+ mainDiagnosis String,
+ numberOfAffectedPersons Integer,
+ secondaryDiagnosis String
+}
+ 
+entity EligibilityRequest {
+ belongingSupportGroups Integer,
+ clubs Integer,
+ comment String,
+ members Integer,
+ membershipFee Double,
+ memberships List<Association>,
+ note String,
+ numberOfFullyEmployed Integer,
+ numberPartTimeEmployed Integer,
+ office Boolean,
+ otherAssociationStructures String,
+ version Integer,
+ year Integer
+}
+ 
+relationship OneToOne
+ {
+ EligibilityRequest(applicant) to Organisation,
+ EligibilityRequest(foundation) to Foundation,
+ EligibilityRequest(originalEligibilityRequest) to EligibilityRequest,
+ EligibilityRequest(promoter) to Organisation,
+ EligibilityRequest(structuralData) to StructuralData
+}
+ 
+relationship OneToMany
+ {
+ EligibilityRequest(attachments) to Attachment,
+ EligibilityRequest(regionalAssociations) to String,
+ EligibilityRequest(regionalSubdivisions) to String,
+ EligibilityRequest(media) to Media
+ 
+}
+ 
+entity ExpensesHistory {
+ year Integer
+}
+ 
+relationship OneToOne
+ {
+ ExpensesHistory(totalExpenses) to TotalExpenses
+}
+ 
+entity ForeignResources {
+ accidentInsurance Double,
+ charityDonations Double,
+ donation Double,
+ federalFunds Double,
+ localFunds Double,
+ lumpSumSupport Double,
+ nursingInsurance Double,
+ otherIncome Double,
+ pensionInsurance Double,
+ projectFunding Double,
+ sponsoring Double,
+ stateFunds Double,
+ thirdPartyIncome Double
+}
+ 
+entity Foundation {
+ address Address,
+ contactPerson ContactPerson,
+ email String,
+ name String,
+ phone String
+}
+ 
+relationship OneToOne
+ {
+ ExpensesHistory(totalExpenses) to TotalExpenses
+}
+ 
+entity IncomeHistory {
+ year Integer
+}
+ 
+relationship OneToOne
+ {
+ IncomeHistory(totalIncome) to TotalIncome
+}
+ 
+entity Limit {
+ comment String,
+ deadline Integer,
+ validFrom ZonedDateTime,
+ validTo ZonedDateTime
+}
+ 
+relationship OneToOne
+ {
+ Limit(organisation) to Organisation
+}
+ 
+entity MaterialExpenses {
+ Double Double,
+ furnishings Double,
+ network Double,
+ officeSupplies Double,
+ postage Double,
+ rentOffice Double,
+ rentOthers Double,
+ training Double,
+ travelCosts Double
+}
+ 
+entity Media {
+ note String,
+ type String
+}
+ 
+entity Organisation {
+ associationRegisterYear Integer,
+ category String,
+ description String,
+ eligible Boolean,
+ email String,
+ foundationYear Integer,
+ homepage String,
+ ikNumber String,
+ lastChecked Instant,
+ mailbox Integer,
+ motto Boolean,
+ name String,
+ phone String,
+ releaseNotificationDeadline ZoneDateTime,
+ sufficient Boolean,
+ transparency String,
+ version Integer
+}
+ 
+relationship OneToOne
+ {
+ Organisation(account) to Account,
+ Organisation(address) to Address,
+ Organisation(associationRegisterExtract) to Attachment,
+ Organisation(contact) to ContactPerson,
+ Organisation(disease) to Disease,
+ Organisation(managingDirector) to ContactPerson,
+ Organisation(releaseNotification) to Attachment,
+ Organisation(statute) to Attachment
+}
+ 
+relationship OneToMany
+ {
+ Organisation(managementBoard) to ContactPerson
+}
+ 
+entity OtherExpenses {
+ membershipExpenses Double,
+ otherInstitutionalExpenses Double
+}
+ 
+entity OwnResources {
+ boosterClubs Double,
+ heritage Double,
+ interestIncome Double,
+ membershipFee Double,
+ otherIncome Double,
+ purposeEnterprise Double,
+ takenReserves Double,
+ umbrellaOrganisation Double
+}
+ 
+entity Payment {
+ amount Double,
+ releasedOn ZoneDateTime,
+ version Integer
+}
+ 
+relationship OneToOne
+ {
+ Payment(supportRequest) to SupportRequest
+}
+ 
+entity Person {
+ locked Boolean,
+ numberOfFails Integer,
+ organisation Organisation,
+ userId String
+}
+ 
+relationship OneToOne
+ {
+ Person(organisation) to Organisation
+}
+ 
+entity Process {
+ content String,
+ name String,
+ time Instant
+}
+ 
+entity ProjectCosts {
+ minusAppliedMeans Double,
+ minusEquityRatio Double,
+ minusOtherMeans Double,
+ total Double
+}
+ 
+entity ProjectRequest {
+ duration Integer,
+ furtherExplanations String,
+ goal String,
+ participants String,
+ projectCosts ProjectCosts,
+ setting String,
+ successIndicators String,
+ targetGroup String,
+ title String
+}
+ 
+relationship OneToMany {
+ ProjectRequest(appliedMeans) to AppliedMeans
+}
+ 
+entity PublicRelationsExpenses {
+ exhibition Double,
+ media Double,
+ otherMaterialCosts Double
+}
+ 
+entity SupportRequest {
+ note String,
+ plannedActivities String,
+ requestedFundingAmount Double,
+ requestedFunds Double,
+ state String,
+ sufficient Boolean,
+ suggestion Double,
+ supportKind String,
+ supportSum Double,
+ transparency String,
+ version Integer,
+ year Integer
+}
+ 
+relationship OneToMany
+ {
+ SupportRequest(attachments) to Attachment,
+ SupportRequest(expensesHistory) to ExpensesHistory,
+ SupportRequest(incomeHistory) to TotalIncome
+}
+ 
+relationship OneToOne
+ {
+ SupportRequest(applicant) to Organisation,
+ SupportRequest(eligibilityRequest) to EligibilityRequest,
+ SupportRequest(originalSupportRequest) to SupportRequest,
+ SupportRequest(projectRequest) to ProjectRequest,
+ SupportRequest(promoter) to Organisation,
+ SupportRequest(totalExpenses) to TotalExpenses,
+ SupportRequest(totalIncome) to TotalIncome
+}
+ 
+entity TotalExpenses {
+ freeReserves Double,
+ materialExpenses MaterialExpenses,
+ otherExpenses OtherExpenses,
+ personnelAdditionalCosts Double,
+ personnelExpenses Double,
+ projectCosts Double,
+ publicRelationsExpenses PublicRelationsExpenses
+}
+ 
+relationship OneToOne {
+ TotalExpenses(materialExpenses) to MaterialExpenses,
+ TotalExpenses(otherExpenses) to OtherExpenses,
+ TotalExpenses(publicRelationsExpenses) to PublicRelationsExpenses 
+}
+ 
+entity TotalIncome {
+}
+ 
+relationship OneToOne {
+ TotalIncome(foreignResources) to ForeignResources,
+ TotalIncome(ownResources) to OwnResources
+}
+ 
+entity UseOfFunds {
+ name String,
+ receivedFunds Double,
+ transparency String,
+ unusedFunds Double,
+ usedFunds Double,
+ version Integer
+}
+ 
+relationship OneToOne {
+ UseOfFunds(expenses) to TotalExpenses,
+ UseOfFunds(paidBySupportRequest) to TotalExpenses,
+ UseOfFunds(supportRequest) to SupportRequest
+}
+ 
+relationship OneToMany {
+ UseOfFunds(attachments) to Attachments
+}
+ 
+entity User {
+ activated Boolean,
+ email String,
+ first_name String,
+ last_name String,
+ login String,
+ password_hash String
+}
+ 
+ 
